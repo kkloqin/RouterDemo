@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.syy.router">
+
+    <application>
+
+        <activity
+            android:name=".ui.LoginCheckActivity"
+            android:configChanges="uiMode"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <meta-data
+                android:name="moduleName"
+                android:value="lc|loginCheck" />
+        </activity>
+    </application>
+</manifest>

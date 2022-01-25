@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.syy.common">
+
+    <application>
+
+        <activity
+            android:name="com.syy.router.LoginActivity"
+            android:configChanges="uiMode">
+
+            <meta-data
+                android:name="moduleName"
+                android:value="login" />
+        </activity>
+    </application>
+</manifest>

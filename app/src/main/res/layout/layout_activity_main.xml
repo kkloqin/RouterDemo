@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+   <Button
+       android:id="@+id/btn_1"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:gravity="center"
+       android:layout_marginTop="15dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:text="打开方式1"/>
+
+   <Button
+       android:id="@+id/btn_2"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:gravity="center"
+       android:layout_marginTop="15dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:text="打开方式2"/>
+
+   <Button
+       android:id="@+id/btn_3"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:gravity="center"
+       android:layout_marginTop="15dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:text="打开方式1——打开test的别名host"/>
+
+   <Button
+       android:id="@+id/btn_4"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:gravity="center"
+       android:layout_marginTop="15dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:text="跳转test(已经登入用户)"/>
+
+   <Button
+       android:id="@+id/btn_5"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:gravity="center"
+       android:layout_marginTop="15dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:text="跳转test(未登入用户)"/>
+
+   <Button
+       android:id="@+id/btn_6"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:gravity="center"
+       android:layout_marginTop="15dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       android:text="传递较大的数据"/>
+</LinearLayout>
