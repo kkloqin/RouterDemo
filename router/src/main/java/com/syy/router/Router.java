@@ -1,5 +1,6 @@
 package com.syy.router;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -85,7 +87,7 @@ public class Router {
         }
     }
 
-    private void launchModule(Context context, String uriString, Bundle bundle, List<Integer> flags) {
+    private void launchModule(Context context, String uriString, Bundle bundle, List<Integer> flags, int requestCode, Callback callback) {
         Log.d(TAG, "launchModule: uriString = " + uriString);
         try {
             if (TextUtils.isEmpty(uriString)) {
@@ -109,7 +111,15 @@ public class Router {
                         intent.addFlags(flag);
                     }
                 }
-                context.startActivity(intent);
+                if (callback == null) {
+                    context.startActivity(intent);
+                } else {
+                    final RouterCallbackFragment callbackFragment = RouterCallbackFragment.getInstance((Activity) context);
+                    callbackFragment.setCallback((requestCode1, resultCode, data) -> {
+                        callback.onActivityResult(requestCode1, resultCode ,data);
+                    });
+                    callbackFragment.startActivityForResult(intent, requestCode);
+                }
             }
         } catch (Exception e) {
             Log.e(TAG, "launchModule: exception=" + e.toString());
@@ -119,29 +129,29 @@ public class Router {
 
     @Deprecated
     public void redirect(Context context, String uriString) {
-        launchModule(context, uriString, null, null);
+        launchModule(context, uriString, null, null, -1 , null);
     }
 
     @Deprecated
     public void redirect(Context context, String uriString, Bundle bundle) {
-        launchModule(context, uriString, bundle, null);
+        launchModule(context, uriString, bundle, null, -1 , null);
     }
 
     public void redirect(Context context, String moduleName, Map<String, String> params) {
-        redirect(context, moduleName, params, null, null);
+        redirect(context, moduleName, params, null, null, -1, null);
     }
 
     public void redirect(Context context, String moduleName, Map<String, String> params, int flag) {
         List<Integer> flags = new ArrayList<Integer>();
         flags.add(flag);
-        redirect(context, moduleName, params, null, flags);
+        redirect(context, moduleName, params, null, flags,-1, null);
     }
 
     public void redirect(Context context, String moduleName, Map<String, String> params, List<Integer> flags) {
-        redirect(context, moduleName, params, null, flags);
+        redirect(context, moduleName, params, null, flags,-1, null);
     }
 
-    public void redirect(Context context, String moduleName, Map<String, String> params, Bundle bundle, List<Integer> flags) {
+    public void redirect(Context context, String moduleName, Map<String, String> params, Bundle bundle, List<Integer> flags,int requestCode, Callback callback) {
         String url;
         Uri uri = Uri.parse(HttpHelper.getAppSchema(context) + "://" + moduleName);
         if (params != null) {
@@ -153,6 +163,14 @@ public class Router {
         } else {
             url = uri.toString();
         }
-        launchModule(context, url, bundle, flags);
+        launchModule(context, url, bundle, flags, requestCode, callback);
+    }
+
+    public void redirectForResult(Context context, String moduleName, HashMap<String, String> params,int requestCode, Callback callback) {
+        redirect(context, moduleName, params, null, null, requestCode, callback);
+    }
+
+    public interface Callback {
+        void onActivityResult(int requestCode, int resultCode, Intent data);
     }
 }

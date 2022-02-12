@@ -32,6 +32,12 @@
                 android:value="test1" />
         </activity>
 
+        <activity android:name=".TestActivity2">
+            <meta-data
+                android:name="moduleName"
+                android:value="test2" />
+        </activity>
+
         <meta-data
             android:name="productName"
             android:value="router" />
